@@ -1,0 +1,190 @@
+<!-- Preloader -->
+ <div id="mask">
+    <div id="loader">
+    </div>
+</div>
+<!-- End Preloader -->
+
+<!-- Home Section -->
+<section id="home">
+    <div class="container">
+        <div class="hero">
+            <hr>
+            <!-- Home Slider -->
+            <div class="home-slider">
+                <ul class="slides">
+                    <li>
+                        <h1>Join A Room</h1>
+                    </li>
+                    <li>
+                        <h1>Now</h1>
+                    </li>
+                </ul>
+            </div>
+            <!-- End Home Slider -->
+            <hr>
+            <p class="center"><a (click)="showRegister()" class="btn btn-empty btn-lg">Join Now</a>
+            </p>
+            <p class="center"><a (click)="showLoginDialog()" class="btn btn-login btn-sm">Login</a>
+            </p>
+        </div>
+    </div>
+</section>
+<!-- End Home Section -->
+<!-- Header -->
+<header class="navbar navbar-default topnav" role="banner">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#home" id="logo">{{title}}</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navigation">
+            <ul class="nav navbar-nav navbar-right" id="nav" #nav>
+                <li><a [routerLink]="['.']" fragment="about">About</a></li>
+                <li><a [routerLink]="['.']" fragment="rooms" >Rooms</a></li>
+                <li><a [routerLink]="['.']" fragment="contact" >Contact Us</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+<!-- End Header -->
+<!-- About Section -->
+<section id="about" class="section">
+    <div class="container">
+        <div class="title col-md-8 col-sm-10 col-xs-12">
+            <h1>About <strong>Us</strong></h1>
+            <hr>
+        </div>
+        <!-- About Text -->
+<!--
+        <p class="about-text">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+-->
+        <!-- About Text -->
+        <div class="promo-line">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="row">
+                    <div class="promo right animated hiding" data-animation="fadeInLeft">
+                        <div class="col-md-2 col-sm-3 promo-icon-box">
+                            <div class="promo-icon">
+                                <i class="fa fa-user fa-2x"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-10 col-sm-9">
+                            <h4>Who we are</h4>
+                            <p>A fun loving team of health and wellness professionals who are here to make wellness fun.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="row">
+                    <div class="promo animated hiding" data-animation="fadeInRight">
+                        <div class="col-md-2 col-sm-3 promo-icon-box">
+                            <div class="promo-icon">
+                                <i class="fa fa-bullseye fa-2x"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-10 col-sm-9">
+                            <h4>Our mission</h4>
+                            <p>To connect people to inspiring coaches and making it fun exercising together.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="promo-line">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="row">
+                    <div class="promo right animated hiding" data-animation="fadeInLeft">
+                        <div class="col-md-2 col-sm-3 promo-icon-box">
+                            <div class="promo-icon">
+                                <i class="fa fa-cogs fa-2x"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-10 col-sm-9">
+                            <h4>What we do</h4>
+                            <p>Offering live video sessions that you join with other friends.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="row">
+                    <div class="promo animated hiding" data-animation="fadeInRight">
+                        <div class="col-md-2 col-sm-3 promo-icon-box">
+                            <div class="promo-icon">
+                                <i class="fa fa-heart fa-2x"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-10 col-sm-9">
+                            <h4>We love our members</h4>
+                            <p>Get in touch! We always love to hear from you!.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End About Section -->
+
+<!-- Event Section -->
+<section id="rooms" class="section">
+    <div class="container">
+        <div class="title col-md-8 col-sm-10 col-xs-12">
+            <h1>Each Room, <strong>A unique Experience</strong></h1>
+            <hr>
+            <p>Join a room on your own or with your friends..</p>
+        </div>
+        <div *ngFor="let data of roomData">
+            <div *ngIf="data.week" class="date">
+                {{setWeekValue(data.week)}}
+            </div>
+
+            <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="32px" fxLayoutAlign="flex-start">
+                <ng-container *ngFor="let room of data.events">
+                    <app-room fxFlex="0 1 calc(25% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%" [room]="room">
+                    </app-room>
+                </ng-container>
+            </div>
+        </div>
+        <div *ngIf="roomData.length <= 0 && !loading">
+            <p class="no-room">There are no available rooms yet. Missing out the fun!!
+                <br><br>Please login to get started<br><br>
+                <a (click)="showLoginDialog()"><strong>Login</strong></a>
+            </p>
+        </div>
+        <mat-spinner  style="margin: auto" [strokeWidth]="2" diameter="50" *ngIf="loading"></mat-spinner>
+    </div>
+</section>
+
+
+<!-- Begin Contact Section-->
+<section id="contact" class="section">
+    <div class="container">
+        <div class="title col-md-8 col-sm-10 col-xs-12">
+            <h1>Contact <strong>us</strong></h1>
+            <hr>
+            <p>We always love to hear from you! Contact us <a href="" target="_blank">here</a></p>
+        </div>
+    </div>
+</section>
+<!-- End Contact Section-->
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <!-- Copyright -->
+        <p class="center grey">2020 &copy; Join
+            A Room. All rights reserved.</p>
+        <!-- End Copyright -->
+    </div>
+</footer>
+<!-- End Footer -->
+
+

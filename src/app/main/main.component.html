@@ -1,0 +1,60 @@
+<!--route container-->
+<ng-container class="main">
+    <mat-toolbar>
+        <div fxShow="true" fxHide.gt-sm="true">
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon class="icon">menu</mat-icon>
+            </button>
+        </div>
+        <button *ngIf="!currentUser" mat-button class="companyName" (click)="logout()">
+            <span>Homepage</span>
+        </button>
+        <span class="example-spacer"></span>
+        <div fxShow="true" fxHide.lt-sm="true">
+            <button *ngIf="currentUser != null" mat-button routerLink="/my-rooms" routerLinkActive="active-list-item">My Rooms</button>
+            <button *ngIf="currentUser != null" mat-button routerLink="/all-rooms" routerLinkActive="active-list-item">All Rooms</button>
+            <button *ngIf="!currentUser" mat-button (click)="goHome()" >All Rooms</button>
+            <button *ngIf="currentUser != null" mat-button routerLink="/account" routerLinkActive="active-list-item">Account</button>
+            <button *ngIf="currentUser != null && currentUser.role == 'ADMIN'" mat-button routerLink="/admin" routerLinkActive="active-list-item">Manage CashOut</button>
+            <a *ngIf="currentUser != null" class="name" fxHide.lt-md="true">
+                {{currentUser.email}}
+            </a>
+            <button *ngIf="currentUser != null" mat-button [mat-menu-trigger-for]="auth">
+                <img class="img-circle profile"  width="30px"
+                     height="30px"><i class="fa fa-ellipsis-v" style="padding-left: 5px; color: #999"></i>
+            </button>
+            <mat-menu #auth="matMenu">
+                <button mat-menu-item (click)="logout()">
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>Sign out</span>
+                </button>
+            </mat-menu>
+        </div>
+    </mat-toolbar>
+    <mat-sidenav-container fxFlexFill class="example-container">
+        <mat-sidenav #sidenav fxLayout="column"  mode="over" role="navigation"
+                     opened="false" fxHide.gt-sm="true" fixedInViewport="true">
+            <div class="space"></div>
+
+            <img *ngIf="currentUser != null" class="img-circle profile profile-mg"  width="50px"
+                 height="50px">
+            <div fxLayout="column">
+                <p *ngIf="currentUser != null" class="email">{{currentUser.email}}</p>
+                <mat-list-item></mat-list-item>
+                <button *ngIf="currentUser != null" mat-button (click)="sidenav.toggle()" routerLink="/my-rooms" routerLinkActive="active-list-item">My Rooms</button>
+                <button *ngIf="currentUser != null" mat-button (click)="sidenav.toggle()" routerLink="/all-rooms" routerLinkActive="active-list-item">All Rooms</button>
+                <button *ngIf="!currentUser" mat-button (click)="goHome()" >All Rooms</button>
+                <button *ngIf="currentUser != null" mat-button (click)="sidenav.toggle()" routerLink="/account" routerLinkActive="active-list-item">Account</button>
+                <button *ngIf="currentUser != null && currentUser.role == 'ADMIN'" mat-button (click)="sidenav.toggle()" routerLink="/admin" routerLinkActive="active-list-item">Manage CashOut</button>
+            </div>
+
+            <button *ngIf="currentUser != null" class="logOut" mat-menu-item (click)="logout()">
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Sign out</span>
+            </button>
+        </mat-sidenav>
+        <mat-sidenav-content fxFlexFill="true">
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</ng-container>

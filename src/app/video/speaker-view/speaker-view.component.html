@@ -1,0 +1,10 @@
+<section>
+    <div fxFill class="preview">
+        <div [hidden]="!isPreviewing" #preview fxFill fxLayoutAlign="center center"></div>
+        <div [hidden]="isPreviewing" fxFill fxLayoutAlign="center center" fxLayout="column">
+            <div class="imageHolder" fxFlexAlign="center">
+                {{localInitial}}
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,41 @@
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<div class="container">
+    <div class="title">
+        <h1>My booked rooms</h1>
+        <hr>
+    </div>
+    <div class="row" fxLayoutAlign="center center">
+        <p><a (click)="launchScheduleDialog()" class="btn btn-schedule btn-lg">Create a room</a></p>
+    </div>
+    <div *ngIf="roomData.length > 0">
+        <div *ngFor="let data of roomData">
+            <div class="date">
+                {{setWeekValue(data.week)}}
+            </div>
+            <div fxLayout="row wrap"
+                 fxLayout.lt-sm="column"
+                 fxLayoutGap="32px"
+                 fxLayoutAlign="flex-start">
+                <ng-container *ngFor="let room of data.events">
+                    <app-room fxFlex="0 1 calc(25% - 32px)"
+                              fxFlex.lt-md="0 1 calc(50% - 32px)"
+                              fxFlex.lt-sm="100%"
+                              [currentUser]="currentUser"
+                              [room]="room">
+                    </app-room>
+                </ng-container>
+            </div>
+        </div>
+
+    </div>
+
+    <div *ngIf="roomData.length <= 0">
+        <p class="no-room">You haven't booked a room yet. Missing out of the fun!! <br><br>
+            Browse <a routerLink="/all-rooms"><strong>All Rooms</strong></a>
+            to find a fun experience or<br><br>
+             <a (click)="launchScheduleDialog()"><strong>Create a room</strong></a>
+        </p>
+    </div>
+</div>
+
+

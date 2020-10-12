@@ -1,0 +1,16 @@
+<section>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    <div mat-dialog-title>
+        <h1 class="title">Payout confirmation sent</h1>
+    </div>
+
+    <mat-card-content>
+        <p>You can collect payment for each event,two weeks after completing the event successfully</p>
+    </mat-card-content>
+
+    <mat-card-actions fxLayout="row" fxLayoutAlign="end">
+        <button [disabled]="loading" (click)="confirmCashOut()" type="button"
+                class="btn btn-continue btn-lg">continue
+        </button>
+    </mat-card-actions>
+</section>

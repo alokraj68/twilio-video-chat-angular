@@ -1,0 +1,29 @@
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<button [autofocus]="false" mat-icon-button (click)="close()" class="close-icon">
+    <mat-icon class="icon">close</mat-icon>
+</button>
+<section>
+    <h2 mat-dialog-title>Reset Password</h2>
+    <p *ngIf="requestError.error != null" style="color: red">{{requestError.error}}</p>
+    <p style="margin-top: 20px">Enter your email to receive reset password information</p>
+    <mat-dialog-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="login">
+                <mat-form-field appearance="outline">
+                    <mat-label>E-mail</mat-label>
+                    <input matInput
+                           type="email"
+                           formControlName="email"
+                           placeholder="name@email.com"
+                    />
+                    <mat-error *ngIf="form.invalid">Enter a valid email</mat-error>
+                </mat-form-field>
+            </div>
+            <button mat-raised-button [disabled]="!form.valid || loading" type="submit">
+                Reset
+            </button>
+        </form>
+    </mat-dialog-content>
+</section>
+
+

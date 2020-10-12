@@ -1,0 +1,257 @@
+<script src="../../../../VideoChat/ClientApp/src/app/home/home.component.ts"></script>
+<section class="main">
+    <mat-sidenav-container [hasBackdrop]="false">
+        <mat-sidenav class="sidenav" #sidenavParticipants mode="over" position="end">
+            <mat-toolbar style="background-color: #ffffff">
+                <p fxFlexAlign="center" class="name">Participants
+                    ({{participantCount}})</p>
+                <span class="example-spacer"></span>
+                <mat-icon fxFlexAlign="center" (click)="sidenavParticipants.toggle()" class="icon">keyboard_arrow_down
+                </mat-icon>
+            </mat-toolbar>
+
+            <div class="search">
+
+            </div>
+            <div *ngIf="activeRoom" style="padding: 16px">
+                <ng-container *ngFor="let participant of getParticipants()">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <p class="avatar">{{getUserInitial(participant.identity)}}</p>
+                        <p class="user-identity">{{participant.identity}} {{isHost(participant.identity)}}</p>
+                        <button mat-icon-button (click)="toggleVoice()">
+                            <mat-icon style="margin: auto">{{micOn ? 'mic_none' : 'mic_off'}}</mat-icon>
+                        </button>
+                    </div>
+                </ng-container>
+            </div>
+
+        </mat-sidenav>
+
+        <!--full screen toggle and view toggle-->
+        <div fxShow="true" fxHide.lt-sm="true" fxLayout="row" class="toggle-actions">
+            <button mat-button class="view-layout" (click)="toggleView()">
+                <mat-icon>view_module</mat-icon>
+                {{speakerView ? 'Gallery View' : 'Speaker View'}}
+            </button>
+            <button mat-button class="full-screen" (click)="openFullscreen()">
+                <mat-icon>{{!fullScreen ? 'fullscreen' : 'fullscreen_exit'}}</mat-icon>
+                {{!fullScreen ? 'Enter FullScreen' : 'Exit FullScreen'}}
+            </button>
+        </div>
+        <!--joining-->
+        <div *ngIf="isJoining" class="joining" fxLayoutAlign="center">
+            <mat-card fxFlex="20%" fxFlex.lt-sm="40%">
+                <mat-card-content class="text-center">
+                    <div fxLayout="row" fxLayoutAlign="center">
+                        <mat-spinner fxFlexAlign="center" [diameter]="20" strokeWidth="1dp"></mat-spinner>
+                        <p style="margin: auto"><strong>Joining ...</strong></p>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+
+        <!--participants small previews-->
+        <div [hidden]="!speakerView" class="preview-small" ngClass.lt-md="preview-small-md"
+             ngClass.lt-sm="preview-small-sm">
+            <div fxLayout="row" fxLayoutAlign="end center" class="max-min">
+                <button (click)="minimizePreview = true" mat-icon-button>
+                    <mat-icon>minimize</mat-icon>
+                </button>
+                <button mat-icon-button (click)="minimizePreview = false">
+                    <mat-icon>view_stream</mat-icon>
+                </button>
+            </div>
+            <div class="all-preview">
+                <ng-container *ngFor="let participant of getParticipants()">
+                    <app-preview [participant]="participant"
+                                 [isHost]="isHost(participant.identity)"
+                                 [localParticipant]="localParticipant"
+                                 [micOn]="true"
+                                 (muted)="remoteUserMuted($event)">
+                    </app-preview>
+                </ng-container>
+            </div>
+
+        </div>
+        <!--speaker view and screen shareView-->
+
+        <div [ngClass]="!speakerView? 'hide' : 'show'" class="preview">
+            <app-speaker-view [participant]="dominantSpeaker"
+                              [localParticipant]="localParticipant">
+            </app-speaker-view>
+        </div>
+
+        <!--gallery view-->
+        <div class="preview" [ngClass]="speakerView? 'hide' : 'show'">
+            <div class="gallery-view" fxLayout="row wrap" fxLayoutAlign="center start" #participant>
+                <ng-container *ngFor="let participant of getParticipants()">
+                    <app-preview [participant]="participant"
+                                 [isHost]="isHost(participant.identity)"
+                                 [localParticipant]="localParticipant"
+                                 [micOn]="true"
+                                 (muted)="remoteUserMuted($event)">
+
+                    </app-preview>
+                </ng-container>
+            </div>
+        </div>
+
+        <!--full screen bar-->
+        <div *ngIf="fullScreen" (mouseenter)="showFullScreenBar = true" (mouseleave)="showFullScreenBar = false"
+             class="full-screen-bar">
+            <div *ngIf="showFullScreenBar" fxLayout="row" fxFlexFill fxLayoutAlign="space-evenly center"
+                 class="full-screen-bar-items">
+                <div fxLayout="column">
+                    <mat-icon (click)="toggleVoice()" fontSet="material-icons-outlined" fxFlexAlign="center"
+                              [ngClass]="{ 'icon-on': micOn, 'icon-off': !micOn }">
+                        {{micOn ? 'mic_none' : 'mic_off'}}
+                    </mat-icon>
+                    <button mat-button (click)="toggleVoice()">Mic
+                    </button>
+                </div>
+                <div fxShow="true" fxHide.lt-sm="true" fxLayout="column">
+                    <mat-icon (click)="invite()" fontSet="material-icons-outlined" fxFlexAlign="center" class="icon-on">
+                        person_add
+                    </mat-icon>
+                    <button (click)="invite()" mat-button>Invite</button>
+                </div>
+
+                <div fxShow="true" fxHide.lt-sm="true" fxLayout="column">
+                    <mat-icon fxFlexAlign="center" (click)="sidenavParticipants.toggle()"
+                              fontSet="material-icons-outlined"
+                              matBadge="{{participantCount}}"
+                              matBadgePosition="above after" class="icon-on">
+                        group
+                    </mat-icon>
+                    <button (click)="sidenavParticipants.toggle()" mat-button>Manage Participants</button>
+                </div>
+                <div fxLayout="column">
+                    <!--present screen-->
+                    <mat-icon (click)="present()" fontSet="material-icons-outlined" fxFlexAlign="center"
+                              [ngClass]="{'active-action': isPresenting, 'inactive-action': !isPresenting}">
+                        present_to_all
+                    </mat-icon>
+                    <button (click)="present()" mat-button>Share</button>
+                </div>
+            </div>
+        </div>
+
+        <!--bottom bar-->
+        <div [hidden]="fullScreen" (mouseenter)="showToolbar = true" (mouseleave)="showToolbar = false" #bottomBar
+             id="bottomBar">
+            <mat-toolbar *ngIf="showToolbar">
+                <div fxFlex="0 1 calc(20% - 16px)" fxLayout="row">
+                    <!--about room-->
+                    <div fxLayout="column" fxFlexAlign="center">
+                        <mat-icon class="icon-on" (click)="showInfo = !showInfo" fontSet="material-icons-outlined"
+                                  fxFlexAlign="center">
+                            info
+                        </mat-icon>
+                        <button mat-button (click)="showInfo = !showInfo">Info
+                        </button>
+
+                    </div>
+
+                    <div fxLayout="column" fxFlexAlign="center">
+                        <mat-icon (click)="toggleVoice()" fontSet="material-icons-outlined" fxFlexAlign="center"
+                                  [ngClass]="{ 'icon-on': micOn, 'icon-off': !micOn }">
+                            {{micOn ? 'mic_none' : 'mic_off'}}
+                        </mat-icon>
+                        <button mat-button (click)="toggleVoice()">Mic
+                        </button>
+
+                    </div>
+                </div>
+                <div fxFlex="0 1 calc(60% - 16px)" fxLayoutGap="32px" fxLayout="row" fxLayoutAlign="center">
+                    <div fxShow="true" fxHide.lt-sm="true" fxLayout="column" fxFlexAlign="center">
+                        <mat-icon (click)="invite()" fontSet="material-icons-outlined" fxFlexAlign="center"
+                                  class="icon-on">person_add
+                        </mat-icon>
+                        <button (click)="invite()" mat-button>Invite</button>
+                    </div>
+
+                    <div fxShow="true" fxHide.lt-sm="true" fxLayout="column" fxFlexAlign="center">
+                        <mat-icon fxFlexAlign="center" (click)="sidenavParticipants.toggle()"
+                                  fontSet="material-icons-outlined"
+                                  matBadge="{{participantCount}}"
+                                  matBadgePosition="above after" class="icon-on">
+                            group
+                        </mat-icon>
+                        <button (click)="sidenavParticipants.toggle()" mat-button>Manage Participants</button>
+                    </div>
+                    <div fxLayout="column" fxFlexAlign="center">
+                        <!--present screen-->
+                        <mat-icon (click)="present()" fontSet="material-icons-outlined" fxFlexAlign="center"
+                                  [ngClass]="{'active-action': isPresenting, 'inactive-action': !isPresenting}">
+                            present_to_all
+                        </mat-icon>
+                        <button (click)="present()" mat-button>Share</button>
+                    </div>
+                </div>
+
+                <div fxFlex="0 1 calc(10% - 16px)" fxLayout="row">
+                    <button fxShow="true" fxHide.lt-sm="true" *ngIf="activeRoom" fxFlexAlign="end" mat-button
+                            class=" btn-end" (click)="leaveRoom()">End
+                        Event
+                    </button>
+
+                    <button style="color: white" fxHide="true" fxShow.lt-sm="true" fxFlexAlign="end" mat-icon-button
+                            [matMenuTriggerFor]="more">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                </div>
+            </mat-toolbar>
+        </div>
+
+        <!-- show more-->
+        <mat-menu #more="matMenu">
+            <button mat-menu-item (click)="toggleView()">
+                <mat-icon>view_module</mat-icon>
+                {{speakerView ? 'Gallery View' : 'Speaker View'}}
+            </button>
+            <button mat-menu-item (click)="openFullscreen()">
+                <mat-icon>{{!fullScreen ? 'fullscreen' : 'fullscreen_exit'}}</mat-icon>
+                {{!fullScreen ? 'Enter FullScreen' : 'Exit FullScreen'}}
+            </button>
+            <button mat-menu-item (click)="invite()">
+                <mat-icon>person_add</mat-icon>
+                Invite
+            </button>
+            <button mat-menu-item (click)="sidenavParticipants.toggle()">
+                <mat-icon matBadge="{{participantCount}}" matBadgePosition="above after">group</mat-icon>
+                Manage Participants
+            </button>
+            <button mat-menu-item (click)="leaveRoom()">
+                <mat-icon>exit_to_app</mat-icon>
+                End Event
+            </button>
+        </mat-menu>
+
+        <!--room information-->
+        <div *ngIf="showInfo" class="room-details" fxLayout="column">
+            <mat-icon fxFlexAlign="end" class="closeInfo" (click)="showInfo = !showInfo">close</mat-icon>
+            <div style="padding: 10px"
+                 fxFlexFill
+                 gdAreas="labelId Id | labelHost host | labelUrl Url | labelParticipant participant"
+                 gdAreas.lt-sm="labelId | Id | labelHost | host | labelUrl | Url | labelParticipant | participant"
+                 gdGap="16px"
+                 gdRows="auto auto auto auto">
+                <p gdArea="labelId" class="label-details">Meeting ID:</p>
+                <p *ngIf="activeRoom" gdArea="Id" class="value-details">{{activeRoom.sid}}</p>
+                <p gdArea="labelHost" class="label-details">Host:</p>
+                <p *ngIf="roomInfo" gdArea="host" class="value-details">{{roomInfo.user.username}}</p>
+                <p gdArea="labelUrl" class="label-details">Invitation URL:</p>
+                <div *ngIf="roomInfo" gdArea="Url" fxLayout="row">
+                    <p class="value-details">{{getRoomUrl(roomInfo.id)}}</p>
+                    <mat-icon class="copy" [cdkCopyToClipboard]="getRoomUrl(roomInfo.id)">file_copy</mat-icon>
+                </div>
+
+                <p gdArea="labelParticipant" class="label-details">Participant ID</p>
+                <p *ngIf="activeRoom" gdArea="participant" class="value-details">{{activeRoom.localParticipant.sid}}</p>
+            </div>
+        </div>
+
+    </mat-sidenav-container>
+</section>
+

@@ -1,0 +1,66 @@
+
+.date {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    text-align: left;
+    line-height: 15px;
+    color: #51516B;
+    text-transform: uppercase;
+}
+
+.title {
+    margin-top: 20px;
+    font-size: 20px;
+    color: black;
+    text-align: center;
+}
+
+.no-room {
+    text-align: center;
+    color: black;
+}
+
+.no-room strong {
+    font-weight: bold;
+    color: #D75B5E;
+}
+
+.no-room a {
+    text-decoration: none;
+}
+.no-room a:hover{
+    border-bottom: 1px solid #D75B5E;
+}
+
+hr {
+    border-color: #D75B5E;
+    width: 90px;
+    border-top: 2px solid #D75B5E;
+}
+
+#section {
+    min-height: 100%;
+    padding-top: 10px;
+    padding-bottom: 70px;
+    overflow: hidden;
+}
+
+p {
+    text-align: right;
+}
+
+.btn-schedule {
+    background: #C9CECB;
+    color: white;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-right: 10px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.btn-schedule:hover, .btn-schedule:active {
+    background-color: #D75B5E;
+}

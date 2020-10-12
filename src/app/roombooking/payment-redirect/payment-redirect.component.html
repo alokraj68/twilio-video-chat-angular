@@ -1,0 +1,27 @@
+
+<section fxFlexAlign="flex-center">
+    <div class="title">
+        <h1>Payment Confirmation</h1>
+        <hr>
+    </div>
+    <div *ngIf="!orderIdEmpty">
+        <mat-spinner  style="margin: auto" [strokeWidth]="2" diameter="50" *ngIf="!success"></mat-spinner>
+        <mat-card *ngIf="success" class="card" fxFlex="60">
+            <p mat-card-title>Thank You!</p>
+            <mat-card-content>
+                <div class="text-center">
+                    <mat-icon class="icon">check_circle_outline</mat-icon>
+                    <h2>Payment Successful !</h2>
+                    <p>We are delighted to inform you that we received your payments for your room</p>
+                    <button mat-button routerLink="/my-rooms">Continue to your rooms</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div *ngIf="orderIdEmpty">
+        <p class="empty">We cannot confirm your payment right now. It seems Payment process was interrupted
+            <br><br> Pay pal will refund your money <br><br>
+            <a routerLink="/all-rooms"><strong>Go back</strong></a>
+        </p>
+    </div>
+</section>

@@ -1,0 +1,77 @@
+section {
+    max-width: 350px;
+    text-align: center;
+}
+.not-member {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.not-member a {
+    color: #64686D;
+}
+
+.mat-button-focus-overlay {
+    background-color: transparent!important;
+}
+
+.not-member strong {
+    color: #D75B5E;
+}
+
+.forgot {
+    width: 90%;
+    color: #D75B5E;
+    margin-right: 0;
+    margin-top: 10px;
+    text-align: end;
+}
+
+.forgot a {
+    color: #D75B5E;
+}
+
+h2 {
+    text-align: center;
+    color: black;
+    font-weight: 300;
+    margin-top: 20px;
+    font-size: 27px;
+    margin-bottom: 30px;
+}
+
+.progress .mat-progress-bar-fill{
+    background: #D75B5E;
+}
+.close-icon {
+    background-color: transparent;
+    color: #999999;
+    float: right;
+}
+
+
+
+.mat-form-field {
+    margin-top: 10px;
+}
+
+/* Border */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #999;
+    background-color: black;
+}
+
+.mat-button, .mat-raised-button {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-top: 20px;
+    background-color: #D75B5E;
+    color: white;
+    width: 80%;
+}
+
+mat-progress-bar {
+    width: 100%;
+}
+

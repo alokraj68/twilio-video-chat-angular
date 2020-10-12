@@ -1,0 +1,46 @@
+<div class="team animated hiding" data-animation="fadeInUp" data-delay="0">
+    <div class="team-photo">
+        <div class="room-image">
+            <img src="{{room.imageUrl}}" alt="">
+        </div>
+        <div class="team-overlay">
+            <p class="text-center">{{room.description}}</p>
+            <ul class="social-list">
+                <li>
+                    <a (click)="shareRoom()">
+                    <span class="social-icon share">
+                      <i class="fa fa-share"></i>
+                    </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="team-inner">
+        <p class="name">{{room.eventName}}
+            <mat-icon class="edit" *ngIf="myroom" (click)="editRoom(room)">create</mat-icon>
+        </p>
+        <p>{{eventDate}}</p>
+        <p>{{startTime}} | {{duration}}</p>
+        <mat-spinner  class="spinner" *ngIf="loading" [diameter]="20" strokeWidth="1dp"></mat-spinner>
+        <p *ngIf="isStart" >
+            <a (click)="startRoom(room)" class="btn btn-start-booked btn-sm">
+                Start
+            </a>
+        </p>
+        <p *ngIf="isJoin">
+            <a (click)="startRoom(room)" class="btn btn-start-booked btn-sm">
+                Join
+            </a>
+        </p>
+        <p *ngIf="isBook">
+            <button [disabled]="isFull" [scrollTop]="true" (click)="bookRoom()" class="btn btn-start btn-sm">{{getPriceText(room.price)}}</button>
+        </p>
+        <p><a (click)="invite()">Invite Friends</a></p>
+
+    </div>
+</div>
+
+<app-window *ngIf="showVideo" [title]="room.eventName">
+    <app-video [twilioToken]="twilioToken"></app-video>
+</app-window>

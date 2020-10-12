@@ -1,0 +1,15 @@
+.title {
+  margin-top: 20px;
+  font-size: 20px;
+  color: black;
+  text-align: center;
+}
+
+.partner-callback {
+  margin-top: 180px;
+}
+
+.partner-callback .description .message {
+  font-size: 18px;
+  text-align: center;
+}

@@ -1,0 +1,66 @@
+.content {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.btn-cancel {
+    background: #C9CECB;
+    border: 2px solid #C9CECB;
+    color: white;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-right: 10px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.btn-cancel:hover {
+    background: #ffffff !important;
+    color: #D75B5E;
+}
+
+input.right-align {
+    -moz-appearance: textfield;
+    padding-bottom: 0;
+}
+
+input.right-align::-webkit-outer-spin-button,
+input.right-align::-webkit-inner-spin-button {
+    display: none;
+}
+
+
+.suffix-prefix {
+    position: relative;
+    bottom: 3px;
+}
+
+.btn-change {
+    background-color: white;
+    color: #D75B5E;
+    border: 2px solid #D75B5E;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-right: 10px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.btn-change:hover {
+    background: #D75B5E !important;
+    color: white;
+}
+.right-align {
+    text-align: right;
+}
+
+.mat-form-field {
+    width: 100%;
+    margin-top: 16px;
+    margin-bottom: 50px;
+}
+

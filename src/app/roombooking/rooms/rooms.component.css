@@ -1,0 +1,150 @@
+
+.date {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    text-align: left;
+    line-height: 15px;
+    text-transform: uppercase;
+    color: #51516B;
+}
+.title {
+    margin-top: 20px;
+    font-size: 20px;
+    color: black;
+    text-align: center;
+}
+.no-room {
+    text-align: center;
+    color: black;
+}
+.no-room strong {
+    color: #D75B5E;
+}
+
+.no-room a {
+    text-decoration: none;
+}
+.no-room a:hover{
+    text-decoration: underline;
+}
+
+hr {
+    border-color: #D75B5E;
+    width: 90px;
+    border-top: 2px solid #D75B5E;
+}
+
+#section {
+    min-height: 400px;
+    padding-top: 10px;
+    padding-bottom: 70px;;
+    overflow: hidden;
+}
+
+.team {
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #ececec;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.team:hover {
+    cursor: default;
+}
+
+.team:hover .team-overlay {
+    margin-top: 0;
+    background-color: rgba(0, 0, 0, 0.69);
+}
+
+.team-photo {
+    position: relative;
+}
+
+.team-photo img {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+}
+
+.team-overlay p {
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+}
+
+.team-overlay h6 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.team-inner {
+    padding: 15px;
+}
+
+.team-inner h3 {
+    text-align: center;
+    margin-top: 0;
+    color: #999;
+    text-transform: uppercase;
+}
+
+.team-inner p {
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    margin: 0;
+}
+
+.social-list {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.social-list li {
+    margin: 5px;
+    display: inline-block;
+}
+
+.social-list li a {
+    font-size: 21px;
+    color: #fff;
+}
+
+.social-list li a:hover {
+    color: #ccc;
+}
+
+.social-list li a:hover .social-icon {
+    border-color: #ccc;
+}
+
+.social-icon {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.social-icon .fa {
+    line-height: inherit;
+    position: absolute;
+    text-align: center;
+    left: 0;
+    width: 100%;
+}
+
+
+
+

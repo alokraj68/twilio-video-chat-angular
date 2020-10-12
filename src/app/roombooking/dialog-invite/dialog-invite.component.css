@@ -1,0 +1,25 @@
+section {
+    overflow: hidden;
+}
+p {
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 22px;
+    text-align: left;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+h3 {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.link {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+

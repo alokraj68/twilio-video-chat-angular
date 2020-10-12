@@ -1,0 +1,15 @@
+<section *ngIf="currentUser != null">
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+  <div class="container partner-callback">
+    <div class="title">
+      <h1>Confirm PayPal Integration</h1>
+      <hr>
+    </div>
+    <div class="description">
+      <div class="message wait-message" *ngIf="loading">Please wait until we check your data...</div>
+      <div class="message thanks-message" *ngIf="!error && !loading && merchantId">Thank you. Your PayPal data successfully saved. Page will be reloaded in {{this.reload}}...</div>
+      <div class="message reload-message" *ngIf="!error && !loading && !merchantId">Page will be reloaded in {{this.reload}}...</div>
+      <div class="message reload-message" *ngIf="error">An error occupied. Please contact us. Page will be reloaded in {{this.reload}}...</div>
+    </div>
+  </div>
+</section>

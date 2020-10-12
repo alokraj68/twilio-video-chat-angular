@@ -1,0 +1,32 @@
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<div *ngIf="roomData" class="container">
+    <div>
+        <div class="title">
+            <h1>Available Rooms</h1>
+            <hr>
+        </div>
+        <div *ngFor="let data of roomData">
+            <div *ngIf="data.week" class="date">
+                {{setWeekValue(data.week)}}
+            </div>
+            <div fxLayout="row wrap"
+                 fxLayout.lt-sm="column"
+                 fxLayoutGap="32px"
+                 fxLayoutAlign="flex-start">
+                <ng-container *ngFor="let room of data.events">
+                    <app-room fxFlex="0 1 calc(25% - 32px)"
+                              fxFlex.lt-md="0 1 calc(50% - 32px)"
+                              fxFlex.lt-sm="100%"
+                              [currentUser]="currentUser"
+                              [room]="room">
+                    </app-room>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="roomData.length <= 0">
+        <p class="no-room">There are no available rooms yet.</p>
+        <p *ngIf="currentUser !=null" class="no-room">There are no available rooms yet. Missing out the fun!! <br><br>Create the fun by <br><br>
+            Browsing <a routerLink="/my-rooms"><strong>My Rooms</strong></a> and create a room from there</p>
+    </div>
+</div>

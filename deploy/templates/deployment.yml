@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: joinaroom-app-deployment
+spec:
+  selector:
+    matchLabels:
+      app: joinaroom-app
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: joinaroom-app
+    spec:
+      containers:
+        - name: joinaroom-app
+          image: __CONTAINER_IMAGE_BUILT_UI__
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            periodSeconds: 15
+            timeoutSeconds: 2
+            successThreshold: 2
+            failureThreshold: 2
+            httpGet:
+              path: /
+              port: 80
+      imagePullSecrets:
+        - name: __K8S_SECRET_NAME__

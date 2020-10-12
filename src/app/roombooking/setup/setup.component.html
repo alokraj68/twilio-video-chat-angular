@@ -1,0 +1,177 @@
+<section>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    <div *ngIf="currentUser != null">
+        <div class="title">
+            <h1>Account and Statistics</h1>
+            <hr>
+        </div>
+        <div class="container setup">
+            <div gdAreas="setup total"
+                 gdGap="32px"
+                 gdRows="auto"
+                 gdAreas.lt-sm="setup | total"
+                 gdRows.lt-sm="auto auto">
+                <div gdArea="setup">
+                    <mat-card fxFlexFill>
+                        <h1 class="card-title">Your PayPal Account</h1>
+                        <mat-divider></mat-divider>
+                        <mat-card-content class="card-content">
+                            <div>
+                                <form class="email-info" [formGroup]="form" (ngSubmit)="savePayPalEmail()">
+                                    <p *ngIf="!payDetails">Please enter your PayPal email that you would like to be paid
+                                        into:</p>
+                                    <div *ngIf="payDetails">
+                                        <div class="pay-info">
+                                            <p>Email: <strong>{{payDetails?.paymentEmail}}</strong></p>
+                                        </div>
+
+                                    </div>
+                                    <div *ngIf="changePayEmail">
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>E-mail</mat-label>
+                                            <input matInput
+                                                   type="email"
+                                                   formControlName="paymentEmail"
+                                                   placeholder="name@email.com"
+                                            />
+                                            <mat-error *ngIf="form.invalid">Please enter a valid email</mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div fxLayout="row">
+                                        <p *ngIf="changePayEmail" class="text-right">
+                                            <button [disabled]="loading" type="button" (click)="changePayEmail = false"
+                                                    class="btn btn-cancel btn-lg">cancel
+                                            </button>
+                                        </p>
+                                        <p *ngIf="!changePayEmail" class="text-right">
+                                            <button [disabled]="loading" type="button" (click)="changePayEmail = true"
+                                                    class="btn btn-change btn-lg">{{payDetails === null ? 'Add' : 'Change'}}
+                                            </button>
+                                        </p>
+                                        <p *ngIf="changePayEmail" class="text-right">
+                                            <button [disabled]="loading" type="submit" class="btn btn-change btn-lg">
+                                                Save
+                                            </button>
+                                        </p>
+                                    </div>
+
+                                </form>
+                            </div>
+
+
+                        </mat-card-content>
+
+                    </mat-card>
+                </div>
+                <div gdArea="total">
+                    <mat-card fxFlexFill>
+                        <h1 class="card-title">Total Earnings</h1>
+                        <mat-divider></mat-divider>
+
+                        <mat-card-content class="card-content">
+                            <div gdAreas="total withdrawal"
+                                 gdRows="auto">
+                                <div gdArea="total" fxFlexFill>
+                                    <p class="text-60 ">Total Earned</p>
+                                    <h1><strong>$ {{total}}</strong></h1>
+                                </div>
+                                <div gdArea="withdrawal" fxFlexFill>
+                                    <p *ngIf="payPalBalance" class="text-60 ">Total Withdrawals</p>
+                                    <h1 *ngIf="payPalBalance"><strong>$ {{payPalBalance.totalPaid}}</strong></h1>
+                                </div>
+                            </div>
+                            <div *ngIf="payPalBalance">
+                                <mat-divider></mat-divider>
+                                <div class="payout" gdAreas="balanceLabel balance"
+                                     gdRows="auto">
+                                    <div gdArea="balanceLabel" fxLayout="row" fxFlexFill>
+                                        <h1 fxFlexAlign="start">Balance</h1>
+                                    </div>
+
+                                    <div gdArea="balance" fxLayout="row" fxFlexFill>
+                                        <h1><strong>$ {{payPalBalance.grossAmount}}</strong></h1>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+
+            <div class="text-center" style="margin-top: 10px">
+                <p>Booking details for upcoming events:</p>
+                <hr>
+                <div>
+                    <p *ngIf="rooms.length <= 0" class="no-room">You haven't created a room yet. Missing out of the
+                        fun!!
+                        <br><br>
+                        Browse <a routerLink="/main/my-rooms"><strong>My Rooms</strong></a>
+                        and create a room from there<br><br> and come here to view stats<br><br>
+                    </p>
+                </div>
+
+            </div>
+
+            <div fxLayout="row wrap"
+                 fxLayout.lt-sm="column"
+                 fxLayoutGap="32px"
+                 fxLayoutAlign="flex-start">
+                <ng-container *ngFor="let room of rooms">
+                    <mat-card class="card-room" fxFlex="0 1 calc(25% - 32px)"
+                              fxFlex.lt-md="0 1 calc(50% - 32px)"
+                              fxFlex.lt-sm="100%">
+                        <mat-card-content>
+                            <div gdAreas="icon amount balance"
+                                 gdRows="auto">
+                                <div gdArea="icon" fxFlexFill>
+                                    <p class="text-60 ">Room Price</p>
+                                    <p><strong>$ {{room.price}}</strong></p>
+                                </div>
+                                <div gdArea="amount" fxFlexFill>
+                                    <p class="text-60 ">Total Paid</p>
+                                    <p class="amount" fxFlexAlign="center">
+                                        <strong>$ {{room.subscribers.length * room.price}}</strong></p>
+                                </div>
+                                <div gdArea="balance" fxFlexFill>
+                                    <p class="text-60 ">Balance</p>
+                                    <div fxLayout="row" fxLayoutAlign="start center">
+                                        <p class="amount" fxFlexAlign="center">
+                                            <strong>$ {{room?.billing?.balance?room?.billing?.balance: 0}}</strong></p>
+                                        <button *ngIf="room?.billing?.balance > 0" fxFlexAlign="center"
+                                                (click)="showCashOutDialog(room)"
+                                                [disabled]="loading"
+                                                type="button" class="btn btn-change btn-sm room-cashout">Cash Out
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <mat-divider></mat-divider>
+                            <div class="details" gdAreas="labelName name | labelPeople People | labelMember member"
+                                 gdRows="auto auto auto">
+                                <p gdArea="labelName" class="text-60">Room:</p>
+                                <p gdArea="name">{{room.eventName}}</p>
+                                <p gdArea="labelPeople" class="text-60">Members:</p>
+                                <p gdArea="People">{{room.subscribers.length}}</p>
+                                <p gdArea="labelMember" class="text-60">Max No of People:</p>
+                                <p gdArea="member">{{room.maxNoPeople}}</p>
+                            </div>
+                        </mat-card-content>
+
+
+                    </mat-card>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section *ngIf="currentUser == null">
+    <div class="title">
+        <h1>Please <a (click)="showLoginDialog()"><strong>Log In</strong></a></h1>
+    </div>
+</section>

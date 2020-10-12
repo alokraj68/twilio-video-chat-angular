@@ -1,0 +1,93 @@
+section {
+    min-height: 165px;
+}
+.note {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    margin-top: 5px;
+    line-height: 15px;
+    color: #000000;
+}
+
+.room-image {
+    width: 146px;
+    height: 165px;
+    overflow: hidden;
+    position: relative;
+}
+.room-image img {
+    height: 165px;
+    border-radius: 4px 4px 0 0;
+    position: absolute;
+    left: -1000%;
+    right: -1000%;
+    top: -1000%;
+    bottom: -1000%;
+    margin: auto;
+    min-height: 100%;
+    min-width: 100%;
+}
+
+.name {
+    font-size: 12px;
+}
+
+.details p {
+    font-weight: normal;
+    font-size: 12px;
+    color: #51516B;
+}
+
+.detailButton {
+    margin-left: 5px;
+}
+
+.btn-invite-friends {
+    background: #27964D;
+    color: white;
+    margin-right: 5px;
+    font-size: 12px;
+    border-radius: 6px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.edit a{
+    text-decoration: underline;
+    margin-right: 5px;
+    color: #D75B5E;
+}
+
+.myrooms a{
+    text-decoration: none;
+    color: #D75B5E;
+    margin-right: 5px;
+}
+
+.go-to {
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 12px;
+    color: #D75B5E;
+    margin-top: 10px;
+    border-radius: 6px;
+    padding-left: 5px;
+    margin-right: 5px;
+    padding-right: 5px;
+}
+
+.go-to:hover {
+    color: white;
+    background-color: #D75B5E;
+}
+
+.float-right {
+    float: right;
+}
+
+.btn-edit:hover{
+    background-color: #D75B5E;
+    color: #fff;
+}
+

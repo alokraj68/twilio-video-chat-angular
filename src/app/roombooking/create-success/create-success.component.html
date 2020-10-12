@@ -1,0 +1,36 @@
+<section>
+    <div gdAreas="image detailButton"
+         gdRows="auto"
+         gdGap="4px"
+         gdAreas.lt-sm="image | detailButton"
+         gdRows.lt-sm="auto auto">
+        <div gdArea="image" class="room-image" fxFlex.lt-sm="auto">
+            <img fxFlex.lt-sm="auto" [src]="room.imageUrl" alt="">
+        </div>
+
+        <div gdArea="detailButton" class="detailButton"
+             gdAreas="note edit | details button"
+             gdRows="auto auto"
+             gdAreas.lt-sm="note | details edit |button"
+             gdRows.lt-sm="auto auto auto">
+            <div class="note" fxLayoutAlign="start">
+                <p fxFlexAlign="start" class="note">Congratulations your event has been created!</p>
+            </div>
+            <div class="edit" gdArea="edit" fxLayoutAlign="end" fxFlexAlign="center">
+                <p><a (click)="edit(room)">Edit</a></p>
+            </div>
+            <div gdArea="details" class="details" fxLayout="column" fxLayoutAlign="start">
+                <p class="name">{{room.eventName}}</p>
+                <p>{{startTime}}-{{endTime}}</p>
+                <p>{{eventDate}}</p>
+            </div>
+            <div gdArea="button" fxLayoutAlign="end" fxLayout="column" fxFlexAlign="end">
+                <p fxFlexAlign="end"><a class="btn btn-invite-friends btn-lg" (click)="inviteFriend(room)">Invite Friends</a></p>
+                <p fxFlexAlign="end" class="myrooms"><a (click)="showEvents()" routerLink="/main/my-rooms">Go to my rooms</a></p>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+

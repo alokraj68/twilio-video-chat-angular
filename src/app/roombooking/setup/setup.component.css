@@ -1,0 +1,146 @@
+section {
+    height: 100%;
+    width: 100%;
+}
+
+.setup {
+    padding-top: 10px;
+    padding-bottom: 70px;
+}
+
+.title {
+    margin-top: 20px;
+    font-size: 20px;
+    color: black;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 20px;
+    color: black;
+    text-align: left;
+}
+
+.card-room {
+    margin-top: 10px;
+}
+
+.card-content {
+    margin-top: 20px;
+}
+
+hr {
+    border-color: #D75B5E;
+    width: 90px;
+    border-top: 2px solid #D75B5E;
+}
+
+a {
+    color: #D75B5E;
+}
+
+.text-60 {
+    font-size: 12px;
+    color: #999999;
+}
+
+.icon {
+    color: #D75B5E;
+    font-size: 50px;
+}
+
+.payout {
+    margin-top: 10px;
+}
+
+.pay-info {
+    margin-top: 20px;
+}
+
+.payout h1 {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
+}
+
+.payout p {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
+}
+
+
+.suffix-prefix {
+    position: relative;
+    bottom: 3px;
+}
+
+.btn-change {
+    background-color: white;
+    color: #D75B5E;
+    border: 2px solid #D75B5E;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-right: 10px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.btn-change:hover {
+    background: #D75B5E !important;
+    color: white;
+}
+.right-align {
+    text-align: right;
+}
+
+input.right-align::-webkit-outer-spin-button,
+input.right-align::-webkit-inner-spin-button {
+    display: none;
+}
+
+input.right-align {
+    -moz-appearance: textfield;
+    padding-bottom: 0px;
+}
+
+.btn-cancel {
+    background: #C9CECB;
+    border: 2px solid #C9CECB;
+    color: white;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-right: 10px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.btn-cancel:hover {
+    background: #ffffff !important;
+    color: #D75B5E;
+}
+
+.details {
+    margin-top: 10px;
+}
+
+.email-info p {
+    color: black;
+}
+
+.room-cashout {
+    height: 25px;
+    padding: 0;
+    margin-left: 5px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.amount {
+    margin-top: auto;
+    margin-bottom: auto;
+}

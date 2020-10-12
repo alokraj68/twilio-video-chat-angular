@@ -1,0 +1,112 @@
+.main {
+    height: 100%;
+    width: 100%;
+}
+.companyName{
+    color: #D75B5E;
+    font-size: 16px;
+}
+
+.mat-toolbar{
+    height: 50px;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 998;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+div {
+    overflow: inherit;
+}
+
+.mat-sidenav-container{
+    background-color: #f6f6f6;
+    min-height: 93vh !important;
+}
+
+a{
+    text-decoration: none;
+    color: #D75B5E;
+    font-size: 14px;
+    font-weight: 300;
+    white-space: normal;
+}
+
+.mat-button {
+    color: #D75B5E;
+    font-size: 16px;
+    font-weight: 300;
+    border: transparent;
+}
+.logOut {
+    margin-top: 20px;
+}
+
+
+.icon {
+    color: #D75B5E;
+}
+
+.example-container {
+    padding-top: 50px;
+    height: 100vh;
+}
+
+.active-list-item {
+    background-color: #D75B5E;
+    color: #ffffff !important; /* Note: You could also use a custom theme */
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.mat-sidenav-content{
+    font-size: 14px;
+}
+.space {
+    height: 50px;
+}
+
+.profile {
+    background-color: #D75B5E;
+    color: #fff;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.profile-mg {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+}
+
+
+#logo {
+    color: #D75B5E;
+}
+
+.user {
+    position: relative;
+    float: right;
+}
+.name {
+    margin: 5px;
+    padding-left: 10px;
+    font-weight: 400;
+    color: black;
+    font-size: 15px;
+}
+.email {
+    margin-bottom: 20px;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 10px;
+    text-align: center;
+}
+
+

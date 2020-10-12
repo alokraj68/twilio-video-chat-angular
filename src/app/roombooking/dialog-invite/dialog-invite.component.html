@@ -1,0 +1,21 @@
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<section>
+    <div mat-dialog-title>
+        <h3>Share Link</h3>
+    </div>
+    <mat-dialog-content>
+        <p>Copy the link below and share it with your friends or clients</p>
+        <div gdAreas="link copy"
+             gdGap="4px"
+             gdRows="auto auto">
+
+            <h3 gdArea="link" class="link">{{link}}
+                <button [autofocus]="false" mat-icon-button>
+                    <mat-icon [cdkCopyToClipboard]="link">file_copy</mat-icon>
+                </button>
+            </h3>
+
+        </div>
+    </mat-dialog-content>
+</section>
+

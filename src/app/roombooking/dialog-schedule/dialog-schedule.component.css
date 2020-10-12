@@ -1,0 +1,153 @@
+form {
+    /*max-width: 500px;*/
+    background-color: white;
+    overflow-x: hidden;
+}
+
+.back {
+    margin: 0 auto;
+    color: rgba(0, 0, 0, 0.51);
+}
+
+.content {
+    padding-left: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+}
+
+.mat-dialog-content {
+    max-height: 85vh;
+
+}
+
+.title {
+    font-size: 20px;
+    color: black;
+}
+
+mat-form-field.mat-form-field {
+    font-size: 12px;
+    width: 100%;
+}
+.mat-form-field-appearance-outline .mat-form-field-infix .mat-input-element {
+    position: relative;
+    bottom: .25em;
+}
+
+hr {
+    margin-top: 0;
+    margin-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+}
+
+.mat-toolbar {
+    background-color: white;
+}
+
+
+.text-secondary {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    color: rgba(0, 0, 0, 0.53);
+}
+
+.right-align {
+    text-align: right;
+}
+
+.save {
+    color: #D75B5E;
+    background-color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.save:active, .save:hover {
+    color: white;
+    background-color: #D75B5E;
+}
+
+input.right-align::-webkit-outer-spin-button,
+input.right-align::-webkit-inner-spin-button {
+    display: none;
+}
+
+input.right-align {
+    -moz-appearance: textfield;
+    padding-bottom: 0px;
+}
+
+
+.suffix-prefix {
+    position: relative;
+    bottom: 3px;
+}
+
+.text-label {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    margin: 0 auto;
+    text-align: left;
+    color: #000000;
+}
+
+.text-label small {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.title {
+    font-style: normal;
+    font-size: 16px;
+    text-align: center;
+    margin: 0 auto;
+    color: rgba(0, 0, 0, 0.51);
+}
+
+.upload-area {
+    background: #F1F3FF;
+    border: 1px dashed #2768D0;
+    box-sizing: border-box;
+    border-radius: 2px;
+    height: 120px;
+    text-align: center;
+}
+
+.center-cropped {
+    width: 100%;
+    height: 120px;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.browse {
+    font-weight: normal;
+    font-size: 14px;
+    text-align: center;
+    color: #2768D0;
+}
+
+.img-size {
+    font-weight: 300;
+    font-size: 8px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+p {
+    text-align: left;
+}
+
+.input-time {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.select-image:hover {
+    cursor: pointer;
+}
+
+.color-red {
+    color: red;
+}

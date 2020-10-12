@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "joinaroom-64fd4": {
+      "hosting": {
+        "JoinARoom": [
+          "joinaroom-64fd4"
+        ]
+      }
+    }
+  }
+}

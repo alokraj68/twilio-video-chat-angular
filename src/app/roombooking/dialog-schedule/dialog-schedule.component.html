@@ -1,0 +1,139 @@
+<form [formGroup]="form" (ngSubmit)="save()" fxFlex.lt-sm="100">
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    <div  mat-dialog-title >
+        <mat-toolbar>
+            <button [disabled]="loading"  [autofocus]="false" (click)="close()" type="button" mat-icon-button>
+                <mat-icon class="back">arrow_back</mat-icon>
+            </button>
+            <p class="title">
+                Create a Room
+            </p>
+            <button [disabled]="loading" mat-button gdArea="save" class="save" type="submit">{{actionText}}</button>
+        </mat-toolbar>
+        <mat-divider></mat-divider>
+    </div>
+    <div mat-dialog-content>
+        <div  class="content">
+            <p class="text-label">Event Name * <small>(Max. 30 characters)</small></p>
+            <mat-form-field appearance="outline">
+                <input matInput
+                       type="text"
+                       maxlength="30"
+                       formControlName="eventName"
+                />
+                <mat-error *ngIf="form.invalid">Name is required</mat-error>
+            </mat-form-field>
+            <div gdAreas="price maxpple"
+                 gdGap="4px"
+                 gdRows="auto"
+                 gdAreas.lt-md="price | maxpple"
+                 gdRows.lt-md="auto auto auto"
+                 gdAreas.lt-sm="price | maxpple"
+                 gdRows.lt-sm="auto auto auto">
+                <div gdArea="price">
+                    <p class="text-label">Price</p>
+                    <mat-form-field appearance="outline">
+                        <input matInput class="right-align"
+                               type="number"
+                               maxlength="4"
+                               min="0"
+                               max="9999"
+                               formControlName="price"
+                        />
+                        <div class="suffix-prefix" matSuffix>.00</div>
+                        <mat-error *ngIf="form.invalid">Please enter a value from 0 to 9999</mat-error>
+                    </mat-form-field>
+                </div>
+                <div gdArea="maxpple">
+                    <p class="text-label">Max. people</p>
+                    <mat-form-field appearance="outline">
+                        <input matInput class="right-align"
+                               type="number"
+                               max="50"
+                               min="2"
+                               formControlName="maxNoPeople"
+                        />
+                        <div class="suffix-prefix" matSuffix>&nbsp;people</div>
+                        <mat-error *ngIf="form.invalid">Please enter a value between 2 and 50</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <p class="text-label">Description *<small>(Max 150 characters)</small></p>
+            <mat-form-field appearance="outline">
+                    <textarea matInput
+                              maxlength="150"
+                              formControlName="description">
+                    </textarea>
+                <mat-error *ngIf="form.invalid">Description is required</mat-error>
+            </mat-form-field>
+            <div gdAreas="eventDate eventDate | starttime endtime | image image"
+                 gdGap="4px"
+                 gdRows="auto auto auto"
+                 gdAreas.lt-md="eventDate | starttime | endtime | image"
+                 gdRows.lt-md="auto auto auto auto">
+                <div gdArea="eventDate">
+                    <p  class="text-label">Event date * </p>
+                    <mat-form-field  appearance="outline">
+                        <input matInput
+                               [min]="minimumDate"
+                               [value]="eventDate"
+                               [matDatepicker]="picker"
+                               formControlName="eventDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="form.invalid">Start Date is required</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div gdArea="starttime">
+                    <p gdArea="labelStart" class="text-label">Start time</p>
+                    <mat-form-field gdArea="starttime" appearance="outline">
+                        <input matInput class="input-time"
+                               [ngxTimepicker]="defaultTime" readonly
+                               formControlName="startTime">
+                        <ngx-material-timepicker #defaultTime [defaultTime]="minimumTime"></ngx-material-timepicker>
+                        <mat-error *ngIf="form.invalid">Start Time is required</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div gdArea="endtime">
+                    <p gdArea="labelStart" class="text-label">End time *</p>
+                    <mat-form-field gdArea="endtime" appearance="outline">
+                        <input matInput class="input-time"
+                               [ngxTimepicker]="defaultTim" readonly
+                               formControlName="endTime">
+                        <ngx-material-timepicker #defaultTim [defaultTime]="minimumTime"></ngx-material-timepicker>
+                        <mat-error *ngIf="form.invalid">End Time is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div gdArea="image">
+                    <p class="text-label">Add Image *<small>(Max size limit 2MB)</small></p>
+                    <p class="text-secondary">Upload the cover image for the event</p>
+                    <div *ngIf="downloadURL== null" class="upload-area"
+                         appDropFile
+                         (hovered)="toggleHover($event)"
+                         (dropped)="onDrop($event)"
+                         [class.hovering]="isHovering">
+                        <h5><label class="select-image" for="image">Browse</label></h5>
+                        <h6><label class="select-image" for="image">Click or Drag Drop a File</label></h6>
+                        <h6 *ngIf="fileError"><label class="select-image color-red" for="image">File is larger than max size allowed</label></h6>
+                        <p  class="text-center">
+                            <input id="image" style="display: none" #imageInput
+                                   type="file"
+                                   accept="image/*"
+                                   (change)="upload(imageInput)">
+
+                        </p>
+                    </div>
+                    <div *ngIf="downloadURL!= null" class="upload-area center-cropped">
+                        <img src="{{downloadURL}}" height="120" width="auto">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</form>

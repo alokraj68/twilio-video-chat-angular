@@ -1,0 +1,94 @@
+<section>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    <div class="title">
+        <h1>Join A Room</h1>
+        <hr>
+    </div>
+    <div class="container content">
+        <div *ngIf="!userOrRoomEmpty" fxFlex.lt-md="auto" fxFlex="1 0 60%" fxLayoutAlign="center" >
+            <div fxFlexAlign="center" fxFlex="60%" fxFlex.lt-md="auto" fxLayout="column"
+                 fxLayoutGap="16px">
+                <mat-card fxFlexAlign="center" class="selectPayment">
+                    <mat-card-header>
+                        <p>Event Detail</p>
+                    </mat-card-header>
+                    <mat-divider></mat-divider>
+                    <mat-card-content>
+                        <div gdAreas="image details"
+                             gdGap="16px"
+                             gdRows="auto"
+                             gdAreas.lt-sm="image | details"
+                             gdRows.lt-sm="auto auto">
+                            <div fxFlex.lt-sm="auto" class="image">
+                                <img fxFlex.lt-sm="auto" gdArea="image" [src]="room?.imageUrl" alt="">
+                            </div>
+
+                            <div gdArea="details"
+                                 gdAreas="labelName name | labelTime Time | labelStartTime startTime | labelEndTime endTime | labelPrice price"
+                                 gdGap="16px"
+                                 gdRow="auto auto auto auto auto">
+                                <p gdArea="labelName" class="payDesc">Event Name :</p>
+                                <p gdArea="name" class="payName">{{room?.eventName}}</p>
+
+                                <p gdArea="labelTime" class="payDesc"> Date :</p>
+                                <p gdArea="Time" class="payName">{{eventDate}}</p>
+
+                                <p gdArea="labelStartTime" class="payDesc"> Star Time :</p>
+                                <p gdArea="startTime" class="payName">{{startTime}}</p>
+
+                                <p gdArea="labelEndTime" class="payDesc"> End Time :</p>
+                                <p gdArea="endTime" class="payName">{{endTime}}</p>
+
+                                <p gdArea="labelPrice" class="payDesc">Price :</p>
+                                <p gdArea="price" class="payName">£{{room?.price}}</p>
+
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card *ngIf="!roomPassed" fxFlexAlign="center" class="selectPayment">
+                    <mat-card-header>
+                        <p>Checkout</p>
+                    </mat-card-header>
+                    <mat-divider></mat-divider>
+                    <mat-card-content>
+                        <mat-radio-group *ngIf="!paid">
+                            <div gdAreas="title image"
+                                 gdGap="16px"
+                                 gdRow="auto auto">
+                                <mat-radio-button gdArea="title">
+                                    <p class="payName">Pay with PayPal</p>
+                                    <p class="payDesc">Transaction fee may apply</p>
+                                </mat-radio-button>
+                                <div gdArea="image" class="center-block">
+                                    <img src="/assets/images/paypal.svg" width="50" height="28" alt="">
+                                </div>
+                            </div>
+                        </mat-radio-group>
+
+                        <div *ngIf="paid">
+                            <P>The event will start soon</P>
+                        </div>
+                        <div class="continue">
+                            <button [disabled]="loading || paid" mat-button [ngClass]="paid?'bg-green' : ''" class="btn-continue" (click)="requestPayment()">{{paid? 'Join': 'Continue'}}</button>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+
+                <div *ngIf="roomPassed" class="room-passed">
+                    <p>Sorry you missed out on this one, the date has passed. <br>
+                        Click <a (click)="goHome()">here</a> to browse the other events</p>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="userOrRoomEmpty" fxLayoutAlign="cemter center">
+            <p class="empty">We cannot process your payment right now. Payment process was interrupted
+                <br><br>
+                <a routerLink="/main/all-rooms"><strong>Go back</strong></a>
+            </p>
+        </div>
+    </div>
+
+</section>
+
+

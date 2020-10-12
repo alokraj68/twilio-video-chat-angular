@@ -1,0 +1,36 @@
+<section>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+    <div class="content">
+        <p mat-dialog-title>CashOut</p>
+        <p>Please enter amount to proceed with cash-out request</p>
+        <form [formGroup]="formPayout" (ngSubmit)="payout()">
+            <mat-form-field appearance="outline">
+                <mat-label>Amount</mat-label>
+                <input matInput class="right-align"
+                       type="number"
+                       max=""
+                       min="1"
+                       formControlName="amount"
+                       placeholder="0"
+                />
+                <div class="suffix-prefix" matSuffix>.00</div>
+                <mat-error *ngIf="formPayout.invalid">Please enter amount between 1
+                    and {{this.room.billing.balance}}</mat-error>
+            </mat-form-field>
+
+            <div gdArea="action" fxLayout="row" fxLayoutAlign="end">
+                <p class="text-right">
+                    <button [disabled]="loading" type="button"
+                            class="btn btn-cancel btn-lg" (click)="close()">cancel
+                    </button>
+                </p>
+                <p class="text-right">
+                    <button [disabled]="loading" type="submit" class="btn btn-change btn-lg">Send
+                    </button>
+                </p>
+            </div>
+        </form>
+    </div>
+
+</section>
